@@ -2,9 +2,9 @@
   "name": "roomm8",
   "version": "1.0.0",
   "description": "my roomate bot app",
-  "main": "index.js",
+  "main": "webhook.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
