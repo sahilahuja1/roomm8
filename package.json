@@ -2,7 +2,7 @@
   "name": "roomm8",
   "version": "1.0.0",
   "description": "my roomate bot app",
-  "main": "webhook.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/sahilahuja1/roomm8",
   "dependencies": {
-    "express": "^4.15.2"
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
   }
 }
