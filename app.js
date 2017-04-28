@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require ('request');
-var mongo = require('/db/mongo');
+var mongomessage = require('db/mongo');
 
 var app = express();
 var router = express.Router();
@@ -15,7 +15,7 @@ var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   'EAAZAHA840f8kBAK7qZBswki14cjR2zIps1mDZBE1f61qILkihFgNJjmOGzG7tjH0MX72QwdQeLx89ZBQQmuZBuWx0NJ3v0YBRekz2nZBBLTi8ZCKgsH6YsYXGoosByoZC2ZAiT6mGq5VhNGpVsBCOq0RdseBTRLZA82NlRiNuamQcIZAQZDZD';
 
 app.get('/', function (req, res) {
-  return res.send(mongo.db);
+  return res.send(mongomessage.find());
 });
 
 app.get('/webhook', function(req, res) {
@@ -68,6 +68,18 @@ function receivedMessage(event) {
 
   var messageText = message.text;
   var messageAttachments = message.attachments;
+
+  var newMessage = new mongomessage({
+	sender: senderID,
+	time: event.timestamp,
+	messageId: message.mid,
+	messageText: message.text
+  });
+
+  newMessage.save(function(err) {
+    if (err) throw err;
+    console.log('Message saved!');
+  });
 
   if (messageText) {
 
