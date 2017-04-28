@@ -1,26 +1,10 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var mongo = require('../db/mongo');
-
-// load the auth variables
 var configAuth = require('./auth');
 
-module.exports = function(passport) {
-
-    // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
-        done(null, user.id);
-    });
-
-    // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        mongo.user.findById(id, function(err, user) {
-            done(err, user);
-        });
-    });
-    
+module.exports = function(passport) {    
     passport.use(new FacebookStrategy({
-        // pull in our app id and secret from our auth.js file
         clientID : configAuth.facebookAuth.clientID,
         clientSecret : configAuth.facebookAuth.clientSecret,
         callbackURL : configAuth.facebookAuth.callbackURL
