@@ -4,7 +4,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var mongo = require('../db/mongo');
 var configAuth = require('./auth');
 
-module.exports = function(passport) {    
+module.exports = function() {    
     passport.use(
         new FacebookStrategy(
             {

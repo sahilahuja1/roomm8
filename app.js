@@ -2,17 +2,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require ('request');
 var mongo = require('./db/mongo');
-var passport = require('passport-facebook');
+var passport = require('./config/passport');
 
 var app = express();
 var router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(passport.initialize());
-// app.use(passport.session);
-
-var mypassport = require('./config/passport')(passport);
 
 var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
