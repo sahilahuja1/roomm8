@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require ('request');
 var mongo = require('./db/mongo');
-var passport = require('passport');
+var passport = require('passport-facebook');
 
 var app = express();
 var router = express.Router();
