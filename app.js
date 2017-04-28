@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
+var PAGE_ACCESS_TOKEN = 'EAAZAHA840f8kBAK7qZBswki14cjR2zIps1mDZBE1f61qILkihFgNJjmOGzG7tjH0MX72QwdQeLx89ZBQQmuZBuWx0NJ3v0YBRekz2nZBBLTi8ZCKgsH6YsYXGoosByoZC2ZAiT6mGq5VhNGpVsBCOq0RdseBTRLZA82NlRiNuamQcIZAQZDZD';
+
 app.get('/', function (req, res) {
   return res.send('hello world!');
 });
