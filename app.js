@@ -15,8 +15,11 @@ var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   'EAAZAHA840f8kBAK7qZBswki14cjR2zIps1mDZBE1f61qILkihFgNJjmOGzG7tjH0MX72QwdQeLx89ZBQQmuZBuWx0NJ3v0YBRekz2nZBBLTi8ZCKgsH6YsYXGoosByoZC2ZAiT6mGq5VhNGpVsBCOq0RdseBTRLZA82NlRiNuamQcIZAQZDZD';
 
 app.get('/', function (req, res) {
+	mongomessage.find({senderID: '1314955871892871' }, function(e, message) {
+	    console.log(message.messageText);
+	});
+
 	return res.send('hello');
-  // return res.send(mongomessage.find());
 });
 
 app.get('/webhook', function(req, res) {
@@ -69,19 +72,6 @@ function receivedMessage(event) {
 
   var messageText = message.text;
   var messageAttachments = message.attachments;
-
-  console.log(senderID);
-  console.log(typeof senderID);
-
-  console.log(event.timestamp);
-  console.log(typeof event.timestamp);
-
-  console.log(message.mid);
-  console.log(typeof message.mid);
-
-  console.log(message.text);
-  console.log(typeof message.text);
-
 
   var messageDb = new mongomessage({
 	sender: senderID,
