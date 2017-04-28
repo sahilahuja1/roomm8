@@ -1,21 +1,24 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require ('request');
-var mongomessage = require('./db/mongo');
+var mongo = require('./db/mongo');
+var passport = require('passport');
 
 var app = express();
 var router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session);
 
 var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
   'EAAZAHA840f8kBAK7qZBswki14cjR2zIps1mDZBE1f61qILkihFgNJjmOGzG7tjH0MX72QwdQeLx89ZBQQmuZBuWx0NJ3v0YBRekz2nZBBLTi8ZCKgsH6YsYXGoosByoZC2ZAiT6mGq5VhNGpVsBCOq0RdseBTRLZA82NlRiNuamQcIZAQZDZD';
 
 app.get('/', function (req, res) {
-	mongomessage.find({sender: '1314955871892871' }, function(e, message) {
+	mongo.message.find({sender: '1314955871892871' }, function(e, message) {
 		message.forEach(function (msg) {
 			console.log(msg.messageText);
 		});
@@ -74,7 +77,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  var messageDb = new mongomessage({
+  var messageDb = new mongo.message({
 	sender: senderID,
 	time: event.timestamp,
 	messageId: message.mid,

@@ -17,4 +17,16 @@ var messageSchema = mongoose.Schema({
 
 var Message = mongoose.model('Message', messageSchema);
 
-module.exports = Message;
+var userSchema = mongoose.Schema({
+    id           : String,
+    token        : String,
+    email        : String,
+    name         : String
+});
+
+var User = mongoose.model('User', userSchema);
+
+module.exports = {
+	'message': Message, 
+	'user': User
+};
