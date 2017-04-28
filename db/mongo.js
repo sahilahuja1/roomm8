@@ -9,9 +9,9 @@ db.once('open', function() {
 });
 
 var messageSchema = mongoose.Schema({
-	sender: Number,
-	time: Date,
-	messageId: Number,
+	sender: String,
+	time: String,
+	messageId: String,
 	messageText: String
 });
 
