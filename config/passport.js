@@ -1,5 +1,5 @@
-var passport = require('passport-facebook');
-var FacebookStrategy = passport.Strategy;
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 var mongo = require('../db/mongo');
 var configAuth = require('./auth');
