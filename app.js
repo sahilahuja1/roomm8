@@ -1,7 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var request = require ('request');
+
 var app = express();
 var router = express.Router();
-var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -28,9 +30,6 @@ app.get('/webhook', function(req, res) {
 
 app.post('/webhook', function (req, res) {
   var data = req.body;
-
-  console.log(data);
-  console.log(data.object);
 
   // Make sure this is a page subscription
   if (data.object === 'page') {
