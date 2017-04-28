@@ -83,17 +83,17 @@ function receivedMessage(event) {
   console.log(typeof message.text);
 
 
- //  var messageDb = new mongomessage({
-	// sender: senderID,
-	// time: event.timestamp,
-	// messageId: message.mid,
-	// messageText: message.text
- //  });
+  var messageDb = new mongomessage({
+	sender: senderID,
+	time: event.timestamp,
+	messageId: message.mid,
+	messageText: message.text
+  });
 
- //  messageDb.save(function(err) {
- //    if (err) throw err;
- //    console.log('Message saved!');
- //  });
+  messageDb.save(function(err) {
+    if (err) throw err;
+    console.log('Message saved!');
+  });
 
   if (messageText) {
 
