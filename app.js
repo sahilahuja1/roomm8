@@ -24,6 +24,9 @@ app.get('/webhook', function(req, res) {
 app.post('/webhook', function (req, res) {
   var data = req.body;
 
+  console.log(data);
+  console.log(data.object);
+  
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
