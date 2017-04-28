@@ -16,6 +16,7 @@ var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
 
 app.get('/', function (req, res) {
 	mongomessage.find({senderID: '1314955871892871' }, function(e, message) {
+		console.log(message);
 	    console.log(message.messageText);
 	});
 
