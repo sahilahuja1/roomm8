@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
@@ -26,7 +31,7 @@ app.post('/webhook', function (req, res) {
 
   console.log(data);
   console.log(data.object);
-  
+
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
