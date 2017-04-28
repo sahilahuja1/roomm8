@@ -69,6 +69,19 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
+  console.log(senderID);
+  console.log(typeof senderID);
+
+  console.log(event.timestamp);
+  console.log(typeof event.timestamp);
+
+  console.log(message.mid);
+  console.log(typeof message.mid);
+
+  console.log(message.text);
+  console.log(typeof message.text);
+
+
   var newMessage = new mongomessage({
 	sender: senderID,
 	time: event.timestamp,
