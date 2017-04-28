@@ -1,7 +1,6 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-// load up the user model
-var User = require('../app/models/user');
+var mongo = require('../db/mongo');
 
 // load the auth variables
 var configAuth = require('./auth');
@@ -15,7 +14,7 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
+        mongo.user.findById(id, function(err, user) {
             done(err, user);
         });
     });
@@ -27,13 +26,13 @@ module.exports = function(passport) {
         callbackURL : configAuth.facebookAuth.callbackURL
     },
     function(token, refreshToken, profile, done) {
-        User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+        mongo.user.findOne({ 'facebook.id' : profile.id }, function(err, user) {
             if (err) {
                 return done(err);
             } else if (user) {
                 return done(null, user);
             } else {
-                var newUser = new User();
+                var newUser = new mongo.user();
                 newUser.id = profile.id;
                 newUser.token = token;
                 newUser.name  = profile.name.givenName + ' ' + profile.name.familyName;
