@@ -1,11 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var checkValidKey = require('../middlewares/checkValidKey');
-
-// Provided - do not modify
-var credentalsAreValid = function (username, password) {
-  return username === 'admin' && password === 'password';
-};
 
 // Implement the routes.
 

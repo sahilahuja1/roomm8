@@ -6,6 +6,7 @@ var passport = require('./config/passport');
 
 var app = express();
 var router = express.Router();
+var loginRouter = require('./routes/login');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -26,6 +27,8 @@ app.get('/', function (req, res) {
 	});
 	return res.render('index');
 });
+
+app.use('/', loginRouter);
 
 // app.get('/auth/facebook', passport.authenticate('facebook'));
 
