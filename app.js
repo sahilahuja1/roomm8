@@ -96,7 +96,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  messageparser(message, sendMessage);
+  messageparser(message, senderId, sendMessage);
 }
 
 function sendMessage(recipientId, messageText) {
@@ -108,6 +108,7 @@ function sendMessage(recipientId, messageText) {
       text: messageText
     }
   };
+  console.log('here');
 
   callSendAPI(messageData);
 }
