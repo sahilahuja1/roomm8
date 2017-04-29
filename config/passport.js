@@ -12,11 +12,6 @@ passport.use(
             callbackURL : configAuth.facebookAuth.callbackURL
         },
         function(accessToken, refreshToken, profile, cb) {
-            console.log('here');
-            console.log(accessToken);
-            console.log(refreshToken);
-            console.log(profile);
-            console.log(cb);
             mongo.user.findOrCreate(
                 { 'id' : profile.id,
                   'token' : accessToken,
@@ -28,3 +23,11 @@ passport.use(
         }
     )
 );
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
