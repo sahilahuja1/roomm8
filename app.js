@@ -84,6 +84,7 @@ app.post('/webhook', function (req, res) {
   
 function receivedMessage(event) {
   console.log(event);
+  sendMessage('1491929964170656', 'test');
 
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -98,7 +99,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  messageparser(message, senderID, sendMessage);
+  messageparser(message, senderID, PAGE_ACCESS_TOKEN, sendMessage);
 }
 
 function sendMessage(recipientId, messageText) {
