@@ -97,8 +97,6 @@ function receivedMessage(event) {
 
 var identifyUser = function(message, senderID, PAGE_ACCESS_TOKEN) {
 	mongo.user.findOne({ 'pgid': senderID } , function (err, person) {
-		console.log(err);
-		console.log(person);
 		if (!err) {
 			if (!person) {
 				request({
@@ -125,8 +123,7 @@ var identifyUser = function(message, senderID, PAGE_ACCESS_TOKEN) {
 					}
 				});
 			} else {
-				console.log('1');
-				  messageparser(message, person.id, senderID, PAGE_ACCESS_TOKEN, sendMessage);
+				messageparser(message, person.id, senderID, PAGE_ACCESS_TOKEN, sendMessage);
 			}
 		}
 	});
