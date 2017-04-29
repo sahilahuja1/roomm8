@@ -21,6 +21,7 @@ var Message = mongoose.model('Message', messageSchema);
 
 var userSchema = mongoose.Schema({
     id : String,
+    pgid : String,
     token : String,
     name : String,
     room : String,

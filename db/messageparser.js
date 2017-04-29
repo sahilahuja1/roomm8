@@ -1,6 +1,7 @@
 var mongo = require('./mongo');
 var passport = require('passport');
 var mongoose = require('mongoose');
+var request = require('request');
 
 /*
 create new room
@@ -8,22 +9,34 @@ join room Sahil
 leave room
 */
 
-var getId = function(senderId, PAGE_ACCESS_TOKEN) {
-	// request.get({
-	//   headers: { 'content-type': 'application/x-www-form-urlencoded' },
-	//   url: "https://graph.facebook.com/v2.6/" + senderId + "?fields=first_name&access_token=" +PAGE_TOKEN,
-	// }, function(err, response, body) {
-	//   if (err) {
-	//     return err
-	//   }
-	//   console.log(JSON.parse(body));
-	//   var name = JSON.parse(body).first_name
-	// });
+var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
+	mongo.user.findOne({ 'pgid': senderId } , function (err, person) {
+		if (!err) {
+			if (!person) {
+				request({
+			  		method: 'GET',
+					uri: `https://graph.facebook.com/v2.6/${id}`,
+					qs: {
+						fields: 'first_name,last_name',
+						access_token: this.token
+					},
+				  	json: true
+				}, function(error, response, body) {
+					  console.log('error:', error); // Print the error if one occurred 
+					  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+					  console.log('body:', body); // Print the HTML for the Google homepage.   
+				});
+			} else {
+				return person.id;
+			}
+		}
+
+	});
 };
 
 var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
-  var id = getId(senderId, PAGE_ACCESS_TOKEN);
+  var id = identifyUser(senderId, PAGE_ACCESS_TOKEN);
 
   var messageDb = new mongo.message({
 	sender: senderId,

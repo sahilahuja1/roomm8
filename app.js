@@ -98,7 +98,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  messageparser(message, senderID, PAGE_ACCESS_TOKEN, sendMessage);
+  messageparser(message, senderID, sendMessage);
 }
 
 function sendMessage(recipientId, messageText) {
