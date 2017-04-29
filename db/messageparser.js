@@ -33,7 +33,6 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 							    });
 								return person.id;
 							}
-
 						);
 					}
 				});
@@ -51,7 +50,7 @@ var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
   var id = identifyUser(senderId, PAGE_ACCESS_TOKEN);
 
-  while (id == 0) {}
+  console.log('id', id);
 
  //  var messageDb = new mongo.message({
 	// sender: senderId,
