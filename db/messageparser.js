@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 var parseMessage = function(message, senderId, sendMessage) {
   var messageDb = new mongo.message({
-	sender: senderID,
+	sender: senderId,
 	messageId: message.mid,
 	messageText: message.text
   });
@@ -16,7 +16,7 @@ var parseMessage = function(message, senderId, sendMessage) {
   });
 
   if (message.text) {
-  	sendMessage(senderID, message.text);
+  	sendMessage(senderId, message.text);
   }
 };
 
