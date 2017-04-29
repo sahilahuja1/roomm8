@@ -43,9 +43,8 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 				return person.id;
 			}
 		}
+		return 1;
 	});
-
-	return 1;
 };
 
 var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
