@@ -7,6 +7,13 @@ var request = require('request');
 create new room
 join room Sahil
 leave room
+
+- grocery list (add/remove)
+- chores around house
+- splitting bill
+- 
+
+
 */
 
 var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
@@ -43,8 +50,11 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 				return person.id;
 			}
 		}
-		return 1;
 	});
+
+	setTimeout(function() {
+		return 1;
+	}, 1000);
 };
 
 var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
