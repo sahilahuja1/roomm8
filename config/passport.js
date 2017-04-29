@@ -19,9 +19,8 @@ passport.use(
             console.log(cb);
             var userDb = mongo.user.findOrCreate(
                 { 'id' : profile.id,
-                  'token' : token,
-                   'email' : profile.emails[0].value,
-                   'name' : profile.name.givenName + ' ' + profile.name.familyName },
+                  'token' : accessToken,
+                  'name' : profile.displayName },
                 function (err, user) {
                     return cb(err, user);
                 }

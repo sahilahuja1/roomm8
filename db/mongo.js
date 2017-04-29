@@ -20,7 +20,6 @@ var Message = mongoose.model('Message', messageSchema);
 var userSchema = mongoose.Schema({
     id : String,
     token : String,
-    email : String,
     name : String,
     room : String
 });
