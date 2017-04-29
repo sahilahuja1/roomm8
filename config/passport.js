@@ -9,7 +9,9 @@ passport.use(
         {
             clientID : configAuth.facebookAuth.clientID,
             clientSecret : configAuth.facebookAuth.clientSecret,
-            callbackURL : configAuth.facebookAuth.callbackURL
+            callbackURL : configAuth.facebookAuth.callbackURL,
+            scope: ['user_friends'],
+            profileFields: ['friends']
         },
         function(accessToken, refreshToken, profile, cb) {
             console.log(profile);
