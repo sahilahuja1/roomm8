@@ -11,6 +11,8 @@ leave room
 
 var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 	mongo.user.findOne({ 'pgid': senderId } , function (err, person) {
+		console.log(err);
+		console.log(person);
 		if (!err) {
 			if (!person) {
 				request({
