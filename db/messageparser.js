@@ -23,7 +23,7 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 				  	json: true
 				}, function(error, response, body) {
 					if (response.statusCode == 200) {
-						mongo.user.findOne({'name' : {$regex : '.*',body.first_name, '.*', body.last_name, '.*'} } , function (err, person) {
+						mongo.user.findOne({'name' : {$regex : '.*' + body.first_name + '.*' + body.last_name + '.*'} } , function (err, person) {
 							console.log(person);
 						}
 					}
