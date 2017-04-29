@@ -20,8 +20,9 @@ var parseMessage = function(message, senderId, sendMessage) {
 
   if (text.includes('create new room')) {
   	var roomId = mongoose.Types.ObjectId();
+  	console.log(senderId);
   	mongo.user.findOne({ 'id': senderId } , function (err, person) {
-  		if (!err) {
+  		if (!err && person) {
   			if (!person.room) {
   				person.room = roomId;
   				sendMessage(senderId, 'Successfully created new room. Now add friends!');
