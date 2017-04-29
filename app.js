@@ -7,7 +7,8 @@ var app = express();
 var router = express.Router();
 
 // PASSPORT
-var passport = require('./config/passport');
+var passport = require('passport');
+require('./config/passport');
 var loginRouter = require('./routes/login');
 
 app.use(bodyParser.urlencoded({ extended: false }));
