@@ -27,8 +27,8 @@ app.get('/', function (req, res) {
 		message.forEach(function (msg) {
 			console.log(msg.messageText);
 		});
+		res.render('index', {'message' : message});
 	});
-	return res.render('index');
 });
 
 app.use('/', loginRouter);
