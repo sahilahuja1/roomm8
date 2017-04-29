@@ -53,11 +53,8 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 
 var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
-  var id;
-
-  setTimeout(function(){
-  	id = identifyUser(senderId, PAGE_ACCESS_TOKEN);
-  }, 200);
+  var id = identifyUser(senderId, PAGE_ACCESS_TOKEN);
+  sleep(200);
 
  //  var messageDb = new mongo.message({
 	// sender: senderId,
