@@ -15,6 +15,6 @@ var loginAdmin = function (req, res, next) {
 // };
 
 router.get('/loginAdmin', loginAdmin);
-router.post('/loginAdmin', credentalsSubmitted);
+// router.post('/loginAdmin', credentalsSubmitted);
 
 module.exports = router;
