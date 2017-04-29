@@ -18,9 +18,9 @@ passport.use(
 
             mongo.user.findOrCreate(
                 { 'id' : profile.id,
-                  'name' : profile.displayName ,
-                                'friends' : profile._json.friends.data},
-                { 'token' : accessToken },
+                  'name' : profile.displayName },
+                { 'token' : accessToken ,
+                  'friends' : profile._json.friends.data},
                 function (err, user) {
                     return cb(err, user);
                 }
