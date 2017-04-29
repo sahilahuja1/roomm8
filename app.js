@@ -25,9 +25,6 @@ var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
 
 app.get('/', function (req, res) {
 	mongo.message.find({sender: '1314955871892871' }, function(e, message) {
-		message.forEach(function (msg) {
-			console.log(msg.messageText);
-		});
 		res.render('index', {'message' : message});
 	});
 });
@@ -83,8 +80,6 @@ app.post('/webhook', function (req, res) {
 });
   
 function receivedMessage(event) {
-  console.log(event);
-
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
@@ -92,7 +87,6 @@ function receivedMessage(event) {
 
   console.log("Received message for user %d and page %d at %d with message:", 
     senderID, recipientID, timeOfMessage);
-  console.log(JSON.stringify(message));
 
   var messageId = message.mid;
   var messageText = message.text;
@@ -110,7 +104,6 @@ function sendMessage(recipientId, messageText) {
       text: messageText
     }
   };
-  console.log('here');
 
   callSendAPI(messageData);
 }
