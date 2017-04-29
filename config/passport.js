@@ -13,6 +13,10 @@ passport.use(
         },
         function(accessToken, refreshToken, profile, cb) {
             console.log('here');
+            console.log(accessToken);
+            console.log(refreshToken);
+            console.log(profile);
+            console.log(cb);
             var userDb = mongo.user.findOrCreate(
                 { 'id' : profile.id,
                   'token' : token,
