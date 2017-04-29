@@ -16,50 +16,8 @@ leave room
 
 */
 
-var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
-	mongo.user.findOne({ 'pgid': senderId } , function (err, person) {
-		console.log(err);
-		console.log(person);
-		if (!err) {
-			if (!person) {
-				request({
-			  		method: 'GET',
-					uri: `https://graph.facebook.com/v2.6/${senderId}`,
-					qs: {
-						fields: 'first_name,last_name',
-						access_token: PAGE_ACCESS_TOKEN
-					},
-				  	json: true
-				}, function(error, response, body) {
-					if (response.statusCode == 200) {
-						mongo.user.findOne({'name' : {$regex : '.*' + body.first_name + '.*' + body.last_name + '.*'}}, 
-							function (err, person) {
-								person.pgid = senderId;
-								person.save(function (err) {
-							        if(err) {
-							            console.error('ERROR!');
-							        }
-							    });
-								return person.id;
-							}
-						);
-					}
-				});
-			} else {
-				console.log('1');
-				return person.id;
-			}
-		}
-	});
-
-	setTimeout(function() {
-		return 1;
-	}, 1000);
-};
-
-var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
+var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
-  var id = identifyUser(senderId, PAGE_ACCESS_TOKEN);
 
   console.log('id', id);
 

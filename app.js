@@ -92,8 +92,49 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  messageparser(message, senderID, PAGE_ACCESS_TOKEN, sendMessage);
+  identifyUser(message, senderID, PAGE_ACCESS_TOKEN);
 }
+
+var identifyUser = function(message, senderID, PAGE_ACCESS_TOKEN) {
+	mongo.user.findOne({ 'pgid': senderID } , function (err, person) {
+		console.log(err);
+		console.log(person);
+		if (!err) {
+			if (!person) {
+				request({
+			  		method: 'GET',
+					uri: `https://graph.facebook.com/v2.6/${senderID}`,
+					qs: {
+						fields: 'first_name,last_name',
+						access_token: PAGE_ACCESS_TOKEN
+					},
+				  	json: true
+				}, function(error, response, body) {
+					if (response.statusCode == 200) {
+						mongo.user.findOne({'name' : {$regex : '.*' + body.first_name + '.*' + body.last_name + '.*'}}, 
+							function (err, person) {
+								person.pgid = senderId;
+								person.save(function (err) {
+							        if(err) {
+							            console.error('ERROR!');
+							        }
+							    });
+				  				messageparser(message, person.id, senderID, PAGE_ACCESS_TOKEN, sendMessage);
+							}
+						);
+					}
+				});
+			} else {
+				console.log('1');
+				  messageparser(message, person.id, senderID, PAGE_ACCESS_TOKEN, sendMessage);
+			}
+		}
+	});
+
+	setTimeout(function() {
+		return 1;
+	}, 1000);
+};
 
 function sendMessage(recipientId, messageText) {
   var messageData = {
