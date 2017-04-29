@@ -2,10 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require ('request');
 var mongo = require('./db/mongo');
-var passport = require('./config/passport');
 
 var app = express();
 var router = express.Router();
+
+// PASSPORT
+var passport = require('./config/passport');
 var loginRouter = require('./routes/login');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,14 +32,17 @@ app.get('/', function (req, res) {
 
 app.use('/', loginRouter);
 
-// app.get('/auth/facebook', passport.authenticate('facebook'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
