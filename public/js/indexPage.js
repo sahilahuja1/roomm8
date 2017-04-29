@@ -1,4 +1,3 @@
-var mongo = require('../../db/mongo');
 
 mongo.message.find({sender: '1314955871892871'}, function(e, message) {
 	console.log('here');

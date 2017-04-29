@@ -5,7 +5,11 @@
 <div id="nav">
   <!-- <input type="text" id="key" size="40" placeholder="Face!"/> -->
   <p><a href="/loginAdmin">Login</a></p>
-  
+
+  <% message.forEach(function(msg) { %>
+    <li> <%= msg.messageText %> </li>
+  <% }); %>
+
 </div>
 
 <script src="/js/jquery.js"></script>
