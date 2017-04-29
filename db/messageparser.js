@@ -13,7 +13,6 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 	mongo.user.findOne({ 'pgid': senderId } , function (err, person) {
 		if (!err) {
 			if (!person) {
-				console.log('1');
 				request({
 			  		method: 'GET',
 					uri: `https://graph.facebook.com/v2.6/${senderId}`,
@@ -23,11 +22,9 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 					},
 				  	json: true
 				}, function(error, response, body) {
-					console.log('2');
 					if (response.statusCode == 200) {
 						mongo.user.findOne({'name' : {$regex : '.*' + body.first_name + '.*' + body.last_name + '.*'}}, 
 							function (err, person) {
-								console.log('3');
 								person.pgid = senderId;
 								person.save(function (err) {
 							        if(err) {
@@ -39,12 +36,11 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 
 						);
 					} else {
-						console.log('4');
 						return 0;
 					}
 				});
 			} else {
-				console.log('5');
+				console.log('1');
 				return person.id;
 			}
 		}
@@ -54,7 +50,12 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
   var id = identifyUser(senderId, PAGE_ACCESS_TOKEN);
-  sleep(200);
+
+  var d1 = new Date();
+  var d2 = new Date();
+  while (d2.valueOf() < d1.valueOf() + 1000) {
+    d2 = new Date();
+  }
 
  //  var messageDb = new mongo.message({
 	// sender: senderId,
