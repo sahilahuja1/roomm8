@@ -25,9 +25,9 @@ var userSchema = mongoose.Schema({
     name : String,
     room : String
 });
+userSchema.plugin(findOrCreate);
 
 var User = mongoose.model('User', userSchema);
-userSchema.plugin(findOrCreate);
 
 module.exports = {
 	'message': Message, 
