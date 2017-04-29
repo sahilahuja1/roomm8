@@ -53,7 +53,7 @@ var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
 
   var d1 = new Date();
   var d2 = new Date();
-  while (d2.valueOf() < d1.valueOf() + 10000) {
+  while (d2.valueOf() < d1.valueOf() + 20000) {
     d2 = new Date();
   }
 
