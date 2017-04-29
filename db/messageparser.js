@@ -22,7 +22,12 @@ var parseMessage = function(message, senderId, sendMessage) {
   	var roomId = mongoose.Types.ObjectId();
   	mongo.user.findOne({ 'id': senderId } , function (err, person) {
   		if (!err) {
-  			person.room = roomId;
+  			if (!person.room) {
+  				person.room = roomId;
+  				sendMessage(senderId, 'Successfully created new room. Now add friends!');
+  			} else {
+  				sendMessage(senderId, 'You are already in a room! Leave that room first.');
+  			}
   		}
 	});
 
