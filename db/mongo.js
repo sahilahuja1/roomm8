@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var findOrCreate = require('mongoose-findorcreate');
+
 mongoose.connect('mongodb://sahilahuja:roompass@ds123351.mlab.com:23351/roomm8');
 // NOTE: CHANGE TO USE ENVIRONMENT VARIABLES FOR USERNAME/PASSWORD
 
@@ -25,21 +27,7 @@ var userSchema = mongoose.Schema({
 });
 
 var User = mongoose.model('User', userSchema);
-
-userSchema.statics.findOrCreate = function findOrCreate(profile, cb){
-    var userObj = new this();
-    this.findOne({_id : profile.id},function(err,result){ 
-        if(!result){
-            userObj.id = profile.id;
-            userObj.token = profile.token;
-            userObj.name = profile.name;
-            userObj.room = profile.room;
-            userObj.save(cb);
-        } else{
-            cb(err,result);
-        }
-    });
-};
+userSchema.plugin(findOrCreate);
 
 module.exports = {
 	'message': Message, 

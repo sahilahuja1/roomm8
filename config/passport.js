@@ -26,7 +26,7 @@ passport.use(
                 }
             );
 
-            userDb.save(function(err) {
+            userDb.save(function(err, click, created) {
                 if (err) throw err;
                 console.log('Message saved!');
             });
