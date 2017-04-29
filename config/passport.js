@@ -14,8 +14,6 @@ passport.use(
             profileFields: ['id', 'displayName', 'friends']
         },
         function(accessToken, refreshToken, profile, cb) {
-            console.log(profile);
-
             mongo.user.findOrCreate(
                 { 'id' : profile.id,
                   'name' : profile.displayName },

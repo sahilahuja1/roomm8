@@ -1,4 +1,4 @@
-var mongo = require('../db/mongo');
+var mongo = require('../../db/mongo');
 
 mongo.message.find({sender: '1314955871892871' }, function(e, message) {
 	message.forEach(function (msg) {
