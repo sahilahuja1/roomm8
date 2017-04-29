@@ -11,3 +11,8 @@ h1 {
 form {
   text-align: center;
 }
+
+#friends {
+    font: 1em  "Arial";
+    text-align: center;
+}
