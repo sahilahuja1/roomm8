@@ -11,14 +11,16 @@ passport.use(
             clientSecret : configAuth.facebookAuth.clientSecret,
             callbackURL : configAuth.facebookAuth.callbackURL,
             scope: ['user_friends'],
-            profileFields: ['friends']
+            profileFields: ['id', 'displayName', 'friends']
         },
         function(accessToken, refreshToken, profile, cb) {
             console.log(profile);
+
             mongo.user.findOrCreate(
                 { 'id' : profile.id,
                   'name' : profile.displayName },
-                { 'token' : accessToken },
+                { 'token' : accessToken ,
+                  'friends' : profile.friends.data},
                 function (err, user) {
                     return cb(err, user);
                 }
