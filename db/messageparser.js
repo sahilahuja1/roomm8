@@ -65,7 +65,7 @@ var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   	console.log('6');
   	var roomId = mongoose.Types.ObjectId();
   	console.log('7');
-  	consolelog(senderId);
+  	console.log(senderId);
   	console.log(id)
   	mongo.user.findOne({ 'id': id } , function (err, person) {
   		console.log('8');
