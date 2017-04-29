@@ -18,7 +18,7 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 					uri: `https://graph.facebook.com/v2.6/${senderId}`,
 					qs: {
 						fields: 'first_name,last_name',
-						access_token: this.token
+						access_token: PAGE_ACCESS_TOKEN
 					},
 				  	json: true
 				}, function(error, response, body) {
