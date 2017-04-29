@@ -19,7 +19,7 @@ leave room
 var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
 
-  if (text.includes('create new room')) {
+  if (text.includes('create new room') || text.includes('create room')) {
   	var roomId = mongoose.Types.ObjectId();
   	mongo.user.findOne({ 'id': id } , function (err, person) {
   		if (!err && person) {
@@ -42,13 +42,19 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
   if (text.includes('leave room')) {
   	mongo.user.findOne({ 'id': id } , function (err, person) {
   		person.room = undefined;
-		sendMessage(senderId, 'Successfully deleted room.');
+		sendMessage(senderId, 'Successfully left room.');
 	  	person.save(function (err) {
 	        if(err) {
 	            console.error('ERROR!');
 	        }
 	    });
 	});
+  }
+
+  sessionStorage['hello'] = true;
+
+  if (text.includes('join room')) {
+  	sendMessage(senderId, "Who's room would you like to join?");
   }
 
 
