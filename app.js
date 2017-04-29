@@ -36,7 +36,7 @@ app.use('/', loginRouter);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/facebook', passport.authenticate('facebook',{ scope: 'read_stream'}));
+app.get('/auth/facebook', passport.authenticate('facebook',{ scope: ['user_friends']}));
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }),
