@@ -19,7 +19,7 @@ var parseMessage = function(message, senderId, sendMessage) {
   });
 
   if (text.includes('create new room')) {
-  	var roomId = var id = mongoose.Types.ObjectId();
+  	var roomId = mongoose.Types.ObjectId();
   	mongo.user.findOne({ 'id': senderId } , function (err, person) {
   		if (!err) {
   			person.room = roomId;
