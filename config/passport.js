@@ -17,7 +17,7 @@ passport.use(
             console.log(refreshToken);
             console.log(profile);
             console.log(cb);
-            var userDb = mongo.user.findOrCreate(
+            mongo.user.findOrCreate(
                 { 'id' : profile.id,
                   'token' : accessToken,
                   'name' : profile.displayName },
@@ -25,11 +25,6 @@ passport.use(
                     return cb(err, user);
                 }
             );
-
-            userDb.save(function(err, click, created) {
-                if (err) throw err;
-                console.log('Message saved!');
-            });
         }
     )
 );
