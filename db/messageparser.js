@@ -35,8 +35,6 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 							}
 
 						);
-					} else {
-						return 0;
 					}
 				});
 			} else {
@@ -45,17 +43,15 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 			}
 		}
 	});
+
+	return 1;
 };
 
 var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
   var id = identifyUser(senderId, PAGE_ACCESS_TOKEN);
 
-  var d1 = new Date();
-  var d2 = new Date();
-  while (d2.valueOf() < d1.valueOf() + 20000) {
-    d2 = new Date();
-  }
+  while (id == 0) {}
 
  //  var messageDb = new mongo.message({
 	// sender: senderId,
