@@ -18,10 +18,10 @@ leave room
 
 var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
+  mongo.user.findOne({ 'id': id } , function (err, person) {
 
-  if (text.includes('create new room') || text.includes('create room')) {
-  	var roomId = mongoose.Types.ObjectId();
-  	mongo.user.findOne({ 'id': id } , function (err, person) {
+	  if (text.includes('create new room') || text.includes('create room')) {
+	  	var roomId = mongoose.Types.ObjectId();
   		if (!err && person) {
   			if (!person.room) {
   				person.room = roomId;
@@ -35,38 +35,30 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
   				sendMessage(senderId, 'You are already in a room! Leave that room first.');
   			}
   		}
-	});
+	  }
 
-  }
+	  if (text.includes('leave room')) {
+	  	mongo.user.findOne({ 'id': id } , function (err, person) {
+	  		person.room = undefined;
+			sendMessage(senderId, 'Successfully left room.');
+		  	person.save(function (err) {
+		        if(err) {
+		            console.error('ERROR!');
+		        }
+		    });
+		});
+	  }
 
-  if (text.includes('leave room')) {
-  	mongo.user.findOne({ 'id': id } , function (err, person) {
-  		person.room = undefined;
-		sendMessage(senderId, 'Successfully left room.');
-	  	person.save(function (err) {
-	        if(err) {
-	            console.error('ERROR!');
-	        }
-	    });
-	});
-  }
+	  if (text.includes('join room')) {
+	  	sendMessage(senderId, "Who's room would you like to join?");
+	  	person.isJoiningRoom = true;
+	  }
 
-  sessionStorage['hello'] = true;
+	  if (person.isJoiningRoom) {
+	  	console.log('joining');
+	  }
 
-  if (text.includes('join room')) {
-  	sendMessage(senderId, "Who's room would you like to join?");
-  }
-
-
-
-  // messageDb.save(function(err) {
-  //   if (err) throw err;
-  //   console.log('Message saved!');
-  // });
-
-  // if (message.text) {
-  // 	sendMessage(senderId, message.text);
-  // }
+  });
 };
 
 module.exports = parseMessage;
