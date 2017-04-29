@@ -9,16 +9,16 @@ leave room
 */
 
 var getId = function(senderId, PAGE_ACCESS_TOKEN) {
-	request.get({
-	  headers: { 'content-type': 'application/x-www-form-urlencoded' },
-	  url: "https://graph.facebook.com/v2.6/" + senderId + "?fields=first_name&access_token=" +PAGE_TOKEN,
-	}, function(err, response, body) {
-	  if (err) {
-	    return err
-	  }
-	  console.log(JSON.parse(body));
-	  var name = JSON.parse(body).first_name
-	});
+	// request.get({
+	//   headers: { 'content-type': 'application/x-www-form-urlencoded' },
+	//   url: "https://graph.facebook.com/v2.6/" + senderId + "?fields=first_name&access_token=" +PAGE_TOKEN,
+	// }, function(err, response, body) {
+	//   if (err) {
+	//     return err
+	//   }
+	//   console.log(JSON.parse(body));
+	//   var name = JSON.parse(body).first_name
+	// });
 };
 
 var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
