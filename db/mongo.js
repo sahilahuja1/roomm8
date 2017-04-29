@@ -18,10 +18,11 @@ var messageSchema = mongoose.Schema({
 var Message = mongoose.model('Message', messageSchema);
 
 var userSchema = mongoose.Schema({
-    id           : String,
-    token        : String,
-    email        : String,
-    name         : String
+    id : String,
+    token : String,
+    email : String,
+    name : String,
+    room : String
 });
 
 var User = mongoose.model('User', userSchema);

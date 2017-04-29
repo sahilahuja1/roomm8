@@ -12,7 +12,8 @@ passport.use(
             callbackURL : configAuth.facebookAuth.callbackURL
         },
         function(accessToken, refreshToken, profile, cb) {
-            mongo.user.findOrCreate(
+            console.log('here');
+            var userDb = mongo.user.findOrCreate(
                 { 'id' : profile.id,
                   'token' : token,
                    'email' : profile.emails[0].value,
@@ -21,6 +22,11 @@ passport.use(
                     return cb(err, user);
                 }
             );
+
+            userDb.save(function(err) {
+                if (err) throw err;
+                console.log('Message saved!');
+            });
         }
     )
 );
