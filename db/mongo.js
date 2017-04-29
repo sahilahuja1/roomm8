@@ -23,7 +23,8 @@ var userSchema = mongoose.Schema({
     id : String,
     token : String,
     name : String,
-    room : String
+    room : String,
+    friends : [String]
 });
 userSchema.plugin(findOrCreate);
 
