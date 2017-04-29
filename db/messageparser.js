@@ -29,8 +29,14 @@ var identifyUser = function(senderId, PAGE_ACCESS_TOKEN) {
 							function (err, person) {
 								console.log('3');
 								person.pgid = senderId;
+								person.save(function (err) {
+							        if(err) {
+							            console.error('ERROR!');
+							        }
+							    });
 								return person.id;
 							}
+
 						);
 					} else {
 						console.log('4');
@@ -59,14 +65,23 @@ var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   	console.log('6');
   	var roomId = mongoose.Types.ObjectId();
   	console.log('7');
+  	consolelog(senderId);
+  	console.log(id)
   	mongo.user.findOne({ 'id': id } , function (err, person) {
   		console.log('8');
+  		console.log(err);
+  		console.log(person);
   		if (!err && person) {
   			console.log('9');
   			if (!person.room) {
   				console.log('10');
   				person.room = roomId;
   				sendMessage(senderId, 'Successfully created new room. Now add friends!');
+			  	person.save(function (err) {
+			        if(err) {
+			            console.error('ERROR!');
+			        }
+			    });
   			} else {
   				console.log('11');
   				sendMessage(senderId, 'You are already in a room! Leave that room first.');
@@ -75,7 +90,6 @@ var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
 	});
 
   }
-
 
 
   // messageDb.save(function(err) {
