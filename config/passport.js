@@ -23,6 +23,8 @@ passport.use(
                     return cb(err, user);
                 }
             );
+
+            // UPDATE ALL THIS USER'S FRIENDS
         }
     )
 );

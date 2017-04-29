@@ -6,12 +6,25 @@ var mongoose = require('mongoose');
 create new room
 join room Sahil
 leave room
-
 */
 
+var getId = function(senderId, PAGE_ACCESS_TOKEN) {
+	request.get({
+	  headers: { 'content-type': 'application/x-www-form-urlencoded' },
+	  url: "https://graph.facebook.com/v2.6/" + senderId + "?fields=first_name&access_token=" +PAGE_TOKEN,
+	}, function(err, response, body) {
+	  if (err) {
+	    return err
+	  }
+	  console.log(JSON.parse(body));
+	  var name = JSON.parse(body).first_name
+	});
+};
 
-var parseMessage = function(message, senderId, sendMessage) {
+var parseMessage = function(message, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
+  var id = getId(senderId, PAGE_ACCESS_TOKEN);
+
   var messageDb = new mongo.message({
 	sender: senderId,
 	messageId: message.mid,
