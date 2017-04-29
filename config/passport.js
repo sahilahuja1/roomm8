@@ -20,7 +20,7 @@ passport.use(
                 { 'id' : profile.id,
                   'name' : profile.displayName },
                 { 'token' : accessToken ,
-                  'friends' : profile._raw.friends.data},
+                  'friends' : profile._json.friends.data},
                 function (err, user) {
                     return cb(err, user);
                 }
