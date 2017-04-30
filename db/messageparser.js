@@ -25,11 +25,6 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
   			if (!person.room) {
   				person.room = mongoose.Types.ObjectId();
   				sendMessage(senderId, 'Successfully created new room. Now add friends!');
-			  	person.save(function (err) {
-			        if(err) {
-			            console.error('ERROR!');
-			        }
-			    });
   			} else {
   				sendMessage(senderId, 'You are already in a room! Leave that room first.');
   			}
@@ -38,23 +33,15 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 
 	  if (text.includes('leave room')) {
   		person.room = undefined;
-		sendMessage(senderId, 'Successfully left room.');
-	  	person.save(function (err) {
-	        if(err) {
-	            console.error('ERROR!');
-	        }
-	    });
+		  sendMessage(senderId, 'Successfully left room.');
 	  }
 
 	  if (text.includes('join room')) {
 	  	sendMessage(senderId, "Who's room would you like to join? (Enter full name)");
 	  	person.isJoiningRoom = true;
 	  } else if (person.isJoiningRoom) {
-      console.log(message);
 			mongo.user.findOne({'name' : message}, 
 				function (err, friend) {
-          console.log(err);
-          console.log(friend);
 					if (friend) {
 						if (friend.room) {
 							person.room = friend.room;
@@ -73,6 +60,12 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 			);
       person.isJoiningRoom = undefined;
 	  }
+
+    person.save(function (err) {
+      if(err) {
+          console.error('ERROR!');
+      }
+    });
   });
 };
 
