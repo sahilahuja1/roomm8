@@ -155,7 +155,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
               }
             }
             chore.save(function (err) {
-              if(err) {
+              if (err) {
                   console.error('ERROR!');
               }
             });
@@ -169,7 +169,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
         function (err, chore) { 
           chore.chores = [];
           chore.save(function (err) {
-            if(err) {
+            if (err) {
               console.error('ERROR!');
             }
           });
