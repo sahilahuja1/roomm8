@@ -178,13 +178,9 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
               }
             }
           );
-
         }
       );
-    } 
-  } 
-
-
+    }
 
     if (text.includes('help')) {
       sendMessage(senderId, 'List of available commands:\ncreate room\njoin room\nleave room\nadd chore\nget chore\nremove chore\nremove all chores');
