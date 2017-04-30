@@ -10,14 +10,12 @@ db.once('open', function() {
   // we're connected!
 });
 
-var messageSchema = mongoose.Schema({
-	sender: String,
-	time: String,
-	messageId: String,
-	messageText: String
+var choreSchema = mongoose.Schema({
+	room: String,
+	chores: [String]
 });
 
-var Message = mongoose.model('Message', messageSchema);
+var Chore = mongoose.model('Chore', choreSchema);
 
 var userSchema = mongoose.Schema({
     id : String,
@@ -26,13 +24,14 @@ var userSchema = mongoose.Schema({
     name : String,
     room : String,
     friends : [{name: String, id: String}],
-    isJoiningRoom : Boolean
+    isJoiningRoom : Boolean,
+    isAddingChore : Boolean
 });
 userSchema.plugin(findOrCreate);
 
 var User = mongoose.model('User', userSchema);
 
 module.exports = {
-	'message': Message, 
+	'chore': Chore, 
 	'user': User
 };

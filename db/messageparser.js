@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var request = require('request');
 
 /*
+HELP with list of commands
+
+
 create new room
 join room Sahil
 leave room
@@ -11,8 +14,6 @@ leave room
 - grocery list (add/remove)
 - chores around house
 - splitting bill
-- 
-
 
 */
 
@@ -64,6 +65,46 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 			);
       person.isJoiningRoom = undefined;
 	  }
+
+    if (text.includes('add chore')) {
+      if (person.room) {
+        sendMessage(senderId, 'What chore would you like to add?');
+        person.isAddingChore = true;
+      } else {
+        sendMessage(senderId, 'Add a room first.');
+      }
+    } else if (person.isAddingChore) {
+      mongo.chore.findOne({'room' : person.room},
+        function (err, chore) {
+          if (!err) {
+            if (chore) {
+              chore.chores.append(message.text);
+              chore.save(function (err) {
+                if(err) {
+                    console.error('ERROR!');
+                }
+              });
+            } else {
+              chore = new model.chore({
+                'room' : person.room,
+                'chores' : [message.text]
+              });
+              chore.save(function (err) {
+                if(err) {
+                    console.error('ERROR!');
+                }
+              });
+            }
+
+            // BROADCAST TO ALL ROOMATES
+
+          }
+        } 
+      );        
+
+    }
+
+
 
     person.save(function (err) {
       if(err) {
