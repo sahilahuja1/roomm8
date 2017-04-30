@@ -57,7 +57,6 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 					if (friend) {
 						if (friend.room) {
 							person.room = friend.room;
-							person.isJoiningRoom = undefined;
 							person.save(function (err) {
 						        if(err) {
 						            console.error('ERROR!');
@@ -71,6 +70,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 					}
 				}
 			);
+      person.isJoiningRoom = undefined;
 	  }
   });
 };
