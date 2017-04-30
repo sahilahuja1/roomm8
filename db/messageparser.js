@@ -83,9 +83,10 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
                 if(err) {
                     console.error('ERROR!');
                 }
+                sendMessage(senderId, 'Chore added!');
               });
             } else {
-              chore = new model.chore({
+              chore = new mongo.chore({
                 'room' : person.room,
                 'chores' : [message.text]
               });
@@ -93,6 +94,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
                 if(err) {
                     console.error('ERROR!');
                 }
+                sendMessage(senderId, 'Chore added!');
               });
             }
 
