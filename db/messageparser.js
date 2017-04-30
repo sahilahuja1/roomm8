@@ -174,7 +174,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       mongo.user.find({'room' : person.room},
         function(err, roomates) {
           var roomatesString = '';
-          for (var i = 0; i < roomates.length; i++) {}
+          for (var i = 0; i < roomates.length; i++) {
             roomatesString += roomates[i].name + '\n';
           }
           sendMessage(senderId, roomatesString);
