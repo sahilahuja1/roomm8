@@ -10,7 +10,6 @@ var router = express.Router();
 // PASSPORT
 var passport = require('passport');
 require('./config/passport');
-var loginRouter = require('./routes/login');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -28,8 +27,6 @@ app.get('/', function (req, res) {
 		res.render('index', {'roomates' : roomates});
 	});
 });
-
-app.use('/', loginRouter);
 
 app.use(passport.initialize());
 app.use(passport.session());
