@@ -137,19 +137,24 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
             for (var i = 0; i < chore.chores.length; i++) {
               if (chore.chores[i].toLowerCase().includes(text)) {
                 var removingChore = chore.chores[i];
-                chore.chores.splice(i, 1);
+                chore.chores.splice(i, 1); 
                 i--;
                 mongo.user.find({'room' : person.room},
                   function(err, roomates) {
                     for (var i = 0; i < roomates.length; i++) {
                       if (roomates[i].pgid) {
-                        sendMessage(roomates[i].pgid, person.name + ' deleted chore: ' + removingChore);
+                        sendMessage(roomates[i].pgid, person.name + ' completed chore: ' + removingChore);
                       } 
                     }
                   }
                 );
               }
             }
+            chore.save(function (err) {
+              if(err) {
+                  console.error('ERROR!');
+              }
+            });
           }
       );
       person.isRemovingChore = undefined;
