@@ -69,7 +69,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 					} else {
 						sendMessage(senderId, 'Try another name');
 					}
-				};
+				}
 			);
 	  }
   });
