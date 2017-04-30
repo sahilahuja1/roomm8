@@ -21,7 +21,7 @@
     </div>
     <div id="right_col">
         Chores:
-        <% if (!chores) { %>
+        <% if (chores == undefined) { %>
 			You don't have any chores!
     	<% } else { %>
 	        <% chores.forEach(function(chore) { %>
