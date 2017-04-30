@@ -49,9 +49,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 	  if (text.includes('join room')) {
 	  	sendMessage(senderId, "Who's room would you like to join? (Enter full name)");
 	  	person.isJoiningRoom = true;
-	  }
-
-	  if (person.isJoiningRoom) {
+	  } else if (person.isJoiningRoom) {
 			mongo.user.findOne({'name' : message}, 
 				function (err, friend) {
 					if (friend) {
