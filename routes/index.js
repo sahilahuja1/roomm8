@@ -19,7 +19,7 @@ module.exports = function (passport) {
 	});
 
 	router.get('/home', isAuthenticated, function(req, res){
-		console.log(req.user);
+		console.log(req.user.displayName);
 		res.render('home', { user: req.user });
 	});
 
