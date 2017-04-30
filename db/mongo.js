@@ -33,27 +33,27 @@ userSchema.plugin(findOrCreate);
 
 var User = mongoose.model('User', userSchema);
 
-var paymentRequestSchema = mongoose.Schema({
-	id : String,
-	amount : Number,
-	description : String
-});
+// var paymentRequestSchema = mongoose.Schema({
+// 	id : String,
+// 	amount : Number,
+// 	description : String
+// });
 
-var PaymentRequest = mongoose.model('PaymentRequest', paymentRequestSchema);
+// var PaymentRequest = mongoose.model('PaymentRequest', paymentRequestSchema);
 
-var roomPaymentsSchema = mongoose.Schema({
-	room : String,
-	payments : [{
-		id : String,
-		amount : Number
-	}]
-});
+// var roomPaymentsSchema = mongoose.Schema({
+// 	room : String,
+// 	payments : [{
+// 		id : String,
+// 		amount : Number
+// 	}]
+// });
 
-var RoomPayments = mongoose.model('RoomPayments', roomPaymentsSchema);
+// var RoomPayments = mongoose.model('RoomPayments', roomPaymentsSchema);
 
 module.exports = {
   'chore': Chore, 
-  'user': User,
-  'paymentRequest' : PaymentRequest,
-  'roomPayments' : RoomPayments
+  'user': User
+  // 'paymentRequest' : PaymentRequest,
+  // 'roomPayments' : RoomPayments
 };
