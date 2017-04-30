@@ -78,7 +78,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
         function (err, chore) {
           if (!err) {
             if (chore) {
-              chore.chores.append(message.text);
+              chore.chores.push(message.text);
               chore.save(function (err) {
                 if(err) {
                     console.error('ERROR!');
