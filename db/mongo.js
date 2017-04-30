@@ -26,19 +26,34 @@ var userSchema = mongoose.Schema({
   friends : [{name: String, id: String}],
   isJoiningRoom : Boolean,
   isAddingChore : Boolean,
-  isRemovingChore : Boolean
+  isRemovingChore : Boolean,
+  isRequestingPayment : Boolean
 });
 userSchema.plugin(findOrCreate);
 
 var User = mongoose.model('User', userSchema);
 
 var paymentRequestSchema = mongoose.Schema({
-
+	id : String,
+	amount : Number,
+	description : String
 });
 
 var PaymentRequest = mongoose.model('PaymentRequest', paymentRequestSchema);
 
+var roomPaymentsSchema = mongoose.Schema({
+	room : String,
+	payments : [{
+		id : String,
+		amount : Number
+	}]
+});
+
+var RoomPayments = mongoose.model('RoomPayments', roomPaymentsSchema);
+
 module.exports = {
   'chore': Chore, 
-  'user': User
+  'user': User,
+  'paymentRequest' : PaymentRequest,
+  'roomPayments' : RoomPayments
 };

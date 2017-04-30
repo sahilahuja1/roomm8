@@ -182,8 +182,96 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       );
     }
 
-    // GET ROOMATES
-    // request payment, mark paid
+    if (text.includes('request') || text.includes('charge')) {
+      if (person.room) {
+        sendMessage(senderId, 'What chore would you like to add?');
+      
+        mongo.roomPayments.findOne({'room' : person.room},
+          function (err, roomPayment) {
+            if (!err) {
+              if (roomPayment) {
+                var numRoomates = roomPayment.payments.length;
+                if (numRoomates < 2) {
+                  sendMessage(senderId, 'You have no roomates!');
+                } else {
+                  var amountRequesting = parseInt(text);
+                  var dividedAmount = amountRequesting/(numRoomates - 1);
+                  for (var i = 0; i < numRoomates; i++) {
+                    if (roomPayment.payments[i].id == id) {
+                      roomPayment.payments[i].amount -= amountRequesting;
+                    } else {
+                      roomPayment.payments[i].amount += dividedAmount;
+                    }
+                  }
+                  roomPayment.save(function (err) {
+                    if (err) {
+                      console.error('ERROR!');
+                    }
+                  });
+                  person.isRequestingPayment = true;
+                }
+              } else {
+                mongo.user.find({'room' : person.room},
+                  function(err, roomates) {
+                    var numRoomates = roomates.length;
+                    if (numRoomates < 2) {
+                      sendMessage(senderId, 'You have no roomates!');
+                    } else {
+                      var amountRequesting = parseInt(text);
+                      var dividedAmount = amountRequesting/(numRoomates - 1);
+                      var paymentsArray = [];
+                      for (var i = 0; i < numRoomates; i++) {
+                        if (roomates[i].id == id) {
+                          paymentsArray.push({'id': id, 'amount' : (amountRequesting * -1)})
+                        } else {
+                          paymentsArray.push({'id': roomates[i].id, 'amount': dividedAmount})
+                        }
+                      }
+                      roomPayment = new mongo.roomPayments({
+                        'room' : person.room,
+                        'payments' : paymentsArray
+                      });
+                      roomPayment.save(function (err) {
+                        if (err) {
+                          console.error('ERROR!');
+                        }
+                      });
+                    }
+                  }
+                );
+                chore = new mongo.chore({
+                  'room' : person.room,
+                  'chores' : [message.text]
+                });
+                chore.save(function (err) {
+                  if(err) {
+                    console.error('ERROR!');
+                  }
+                });
+              }
+
+              mongo.user.find({'room' : person.room},
+                function(err, roomates) {
+                  for (var i = 0; i < roomates.length; i++) {
+                    if (roomates[i].pgid) {
+                      sendMessage(roomates[i].pgid, 'New Chore Added: ' + message.text);
+                    } 
+                  }
+                }
+              );
+            }
+          } 
+
+
+
+
+      } else {
+        sendMessage(senderId, 'Add a room first.');
+      }
+    } else if (person.isRequestingPayment) {
+
+      person.isRequestingPayment = undefined;
+    }
 
     if (text.includes('help')) {
       sendMessage(senderId, 'List of available commands:\ncreate room\njoin room\nleave room\nadd chore\nget chore\nremove chore\nremove all chores\nget roomates');
