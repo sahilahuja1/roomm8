@@ -3,7 +3,7 @@ var router = express.Router();
 var mongo = require('../db/mongo');
 
 var isAuthenticated = function (req, res, next) {
-	console.log(req.user);
+	console.log('user: ', req.user);
 	if (req.isAuthenticated())
 		return next();
 	res.redirect('/pluto');
