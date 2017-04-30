@@ -55,13 +55,17 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 			mongo.user.findOne({'name' : message}, 
 				function (err, friend) {
 					if (friend) {
-						person.room = friend.room;
-						person.isJoiningRoom = undefined;
-						person.save(function (err) {
-					        if(err) {
-					            console.error('ERROR!');
-					        }
-					    });
+						if (friend.room) {
+							person.room = friend.room;
+							person.isJoiningRoom = undefined;
+							person.save(function (err) {
+						        if(err) {
+						            console.error('ERROR!');
+						        }
+						    });
+						} else {
+							sendMessage(senderId, 'That person is not in a room');
+						}
 					} else {
 						sendMessage(senderId, 'Try another name');
 					}
