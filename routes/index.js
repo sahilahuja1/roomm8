@@ -24,10 +24,15 @@ module.exports = function (passport) {
 						function(e, roomates) {
 							mongo.chore.findOne({room: currUser.room}, 
 								function(e, chore) {
-									console.log(chore.chores);
-									res.render('home', 
-										{'user': req.user, 'roomates' : roomates, 'chores' : chore.chores}
-									);
+									if (chore) {
+										res.render('home', 
+											{'user': req.user, 'roomates' : roomates, 'chores' : chore.chores}
+										);
+									} else {
+										res.render('home', 
+											{'user': req.user, 'roomates' : roomates, 'chores' : []}
+										);
+									} 
 								}
 							);
 						}
