@@ -31,14 +31,17 @@ app.get('/', function (req, res) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/facebook', passport.authenticate('facebook',{ scope: ['user_friends']}));
+var routes = require('./routes/index')(passport);
+app.use('/', routes);
 
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+// app.get('/auth/facebook', passport.authenticate('facebook',{ scope: ['user_friends']}));
+
+// app.get('/auth/facebook/callback',
+//   passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
