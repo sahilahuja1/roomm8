@@ -34,7 +34,7 @@ module.exports = function (passport) {
 					);
 				} else {
 					res.render('home', 
-						{'user': req.user}
+						{'user': req.user, 'chores' : []}
 					);
 				}
 		 	}
