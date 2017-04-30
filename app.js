@@ -111,7 +111,7 @@ var identifyUser = function(message, senderID, PAGE_ACCESS_TOKEN) {
 					if (response.statusCode == 200) {
 						mongo.user.findOne({'name' : {$regex : '.*' + body.first_name + '.*' + body.last_name + '.*'}}, 
 							function (err, person) {
-								person.pgid = senderId;
+								person.pgid = senderID;
 								person.save(function (err) {
 							        if(err) {
 							            console.error('ERROR!');
