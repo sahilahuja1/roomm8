@@ -39,7 +39,7 @@ module.exports = function (passport) {
 					);
 				} else {
 					res.render('home', 
-						{'user': req.user, 'chores' : []}
+						{'user': req.user, 'roomates': [], 'chores' : []}
 					);
 				}
 		 	}
