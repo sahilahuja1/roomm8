@@ -25,7 +25,8 @@ var userSchema = mongoose.Schema({
     room : String,
     friends : [{name: String, id: String}],
     isJoiningRoom : Boolean,
-    isAddingChore : Boolean
+    isAddingChore : Boolean,
+    isRemovingChore : Boolean
 });
 userSchema.plugin(findOrCreate);
 

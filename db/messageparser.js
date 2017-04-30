@@ -119,6 +119,41 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       );
     }
 
+    if (text.includes('remove chores')) {
+      if (person.room) {
+        sendMessage(senderId, 'What chore would you like to remove?');
+        mongo.chore.findOne({'room' : person.room},
+          function (err, chore) {
+            sendMessage(senderId, chore.chores.join('\n'));
+          }
+        );
+        person.isRemovingChore = true;
+      } else {
+        sendMessage(senderId, 'Add a room first.');
+      }
+    } else if (person.isRemovingChore) {
+      mongo.chore.find({'room' : person.room},
+          function (err, chore) {
+            for (var i = 0, i < chore.chores.length; i++) {
+              if (chore.chores[i].toLowerCase().contains(text)) {
+                var removingChore = chore.chores[i];
+                chore.chores.splice(i, 1);
+                i--;
+                mongo.user.find({'room' : person.room},
+                  function(err, roomates) {
+                    for (var i = 0; i < roomates.length; i++) {
+                      if (roomates[i].pgid) {
+                        sendMessage(roomates[i].pgid, person.name + ' deleted chore: ' + removingChore);
+                      } 
+                    }
+                  }
+                );
+              }
+            }
+          }
+      );
+      person.isRemovingChore = undefined;
+    }
 
     if (text.includes('help')) {
       sendMessage(senderId, 'Here is help');
