@@ -55,7 +55,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 						        }
 						    });
 						} else {
-							sendMessage(senderId, 'That person is not in a room');
+							sendMessage(senderId, person.name + ' is not in a room');
 						}
 					} else {
 						sendMessage(senderId, 'Try another name');
