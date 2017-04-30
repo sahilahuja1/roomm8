@@ -21,7 +21,7 @@ module.exports = function (passport) {
 		 	function(e, currUser) {
 				mongo.user.find({room: currUser.room }, 
 					function(e, roomates) {
-						mongo.chore.find({room: currUser.room}, 
+						mongo.chore.findOne({room: currUser.room}, 
 							function(e, chore) {
 								console.log(chore.chores);
 								res.render('home', 
