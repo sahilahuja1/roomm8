@@ -21,8 +21,13 @@ module.exports = function (passport) {
 		 	function(e, currUser) {
 				mongo.user.find({room: currUser.room }, 
 					function(e, roomates) {
-						res.render('home', 
-							{'username': req.user.name, 'roomates' : roomates});
+						mongo.chore.find({room: currUser.room }, 
+							function(e, chore) {
+								res.render('home', 
+									{'user': req.user, 'roomates' : roomates, 'chores' : chore.chores}
+								);
+							}
+						);
 					}
 				);
 		 	}

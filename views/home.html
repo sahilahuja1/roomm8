@@ -4,7 +4,7 @@
 <div id='friends' > 
 </div>
 
-<h1>Welcome Home <%= username %></h1>
+<h1>Welcome Home <%= user.name %></h1>
 
 <div id="summary">
     <div id="left_col">
@@ -14,6 +14,9 @@
 		  <% }); %>
     </div>
     <div id="right_col">
-        chores go here
+        Chores:
+        <% chores.forEach(function(chore) { %>
+	    	<li> <%= chore %> </li>
+	  	<% }); %>
     </div>
 </div>
