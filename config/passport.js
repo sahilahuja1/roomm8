@@ -25,6 +25,18 @@ passport.use(
                 }
             );
 
+            mongo.user.find({'id : profile.id'}], 
+                function(err, user) {
+                    user.friends = profile._json.friends.data;
+                    user.save(function (err) {
+                      if(err) {
+                        console.error('ERROR!');
+                      }
+                    });
+
+                }
+            );
+
             // UPDATE ALL THIS USER'S FRIENDS
         }
     )
