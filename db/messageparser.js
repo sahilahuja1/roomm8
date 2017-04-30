@@ -98,7 +98,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 
             mongo.user.find({'room' : person.room},
               function(err, roomates) {
-                for (var i = 0; i <= roomates.length; i++) {
+                for (var i = 0; i < roomates.length; i++) {
                   if (roomates[i].pgid) {
                     sendMessage(roomates[i].pgid, 'New Chore Added: ' + message.text);
                   } 
