@@ -3,20 +3,6 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var request = require('request');
 
-/*
-HELP with list of commands
-
-
-create new room
-join room Sahil
-leave room
-
-- grocery list (add/remove)
-- chores around house
-- splitting bill
-
-*/
-
 var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessage) {
   var text = message.text.toLowerCase();
   mongo.user.findOne({ 'id': id } , function (err, person) {
@@ -51,10 +37,11 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
 						if (friend.room) {
 							person.room = friend.room;
 							person.save(function (err) {
-						        if(err) {
-						            console.error('ERROR!');
-						        }
-						    });
+    					  if(err) {
+    					    console.error('ERROR!');
+    					  }
+    				  });
+              sendMessage(senderId, 'Added to room');
 						} else {
 							sendMessage(senderId, friend.name + ' is not in a room');
 						}
@@ -81,7 +68,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
               chore.chores.push(message.text);
               chore.save(function (err) {
                 if(err) {
-                    console.error('ERROR!');
+                  console.error('ERROR!');
                 }
               });
             } else {
@@ -91,7 +78,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
               });
               chore.save(function (err) {
                 if(err) {
-                    console.error('ERROR!');
+                  console.error('ERROR!');
                 }
               });
             }
@@ -107,7 +94,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
             );
           }
         } 
-      );        
+      );  
       person.isAddingChore = undefined;
     }
 
@@ -137,29 +124,29 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       }
     } else if (person.isRemovingChore) {
       mongo.chore.findOne({'room' : person.room},
-          function (err, chore) {
-            for (var i = 0; i < chore.chores.length; i++) {
-              if (chore.chores[i].toLowerCase().includes(text)) {
-                var removingChore = chore.chores[i];
-                chore.chores.splice(i, 1); 
-                i--;
-                mongo.user.find({'room' : person.room},
-                  function(err, roomates) {
-                    for (var i = 0; i < roomates.length; i++) {
-                      if (roomates[i].pgid) {
-                        sendMessage(roomates[i].pgid, person.name + ' completed chore: ' + removingChore);
-                      } 
-                    }
+        function (err, chore) {
+          for (var i = 0; i < chore.chores.length; i++) {
+            if (chore.chores[i].toLowerCase().includes(text)) {
+              var removingChore = chore.chores[i];
+              chore.chores.splice(i, 1); 
+              i--;
+              mongo.user.find({'room' : person.room},
+                function(err, roomates) {
+                  for (var i = 0; i < roomates.length; i++) {
+                    if (roomates[i].pgid) {
+                      sendMessage(roomates[i].pgid, person.name + ' completed chore: ' + removingChore);
+                    } 
                   }
-                );
-              }
+                }
+              );
             }
-            chore.save(function (err) {
-              if (err) {
-                  console.error('ERROR!');
-              }
-            });
           }
+          chore.save(function (err) {
+            if (err) {
+              console.error('ERROR!');
+            }
+          });
+        }
       );
       person.isRemovingChore = undefined;
     }
@@ -186,6 +173,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       );
     }
 
+    // GET ROOMATES
     // request payment, mark paid
 
     if (text.includes('help')) {
@@ -193,8 +181,8 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
     }
 
     person.save(function (err) {
-      if(err) {
-          console.error('ERROR!');
+      if (err) {
+        console.error('ERROR!');
       }
     });
   });

@@ -11,28 +11,28 @@ db.once('open', function() {
 });
 
 var choreSchema = mongoose.Schema({
-	room: String,
-	chores: [String]
+  room: String,
+  chores: [String]
 });
 
 var Chore = mongoose.model('Chore', choreSchema);
 
 var userSchema = mongoose.Schema({
-    id : String,
-    pgid : String,
-    token : String,
-    name : String,
-    room : String,
-    friends : [{name: String, id: String}],
-    isJoiningRoom : Boolean,
-    isAddingChore : Boolean,
-    isRemovingChore : Boolean
+  id : String,
+  pgid : String,
+  token : String,
+  name : String,
+  room : String,
+  friends : [{name: String, id: String}],
+  isJoiningRoom : Boolean,
+  isAddingChore : Boolean,
+  isRemovingChore : Boolean
 });
 userSchema.plugin(findOrCreate);
 
 var User = mongoose.model('User', userSchema);
 
 module.exports = {
-	'chore': Chore, 
-	'user': User
+  'chore': Chore, 
+  'user': User
 };

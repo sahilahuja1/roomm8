@@ -8,56 +8,56 @@
 
 </div>
 
-<script src="/js/jquery.js"></script>
-<script src="/js/indexPage.js"></script>
-
 <script>
   window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1766931530285001',
-      xfbml      : true,
-      version    : 'v2.9'
-    });
-    FB.AppEvents.logPageView();
+  FB.init({
+    appId    : '1766931530285001',
+    xfbml    : true,
+    version  : 'v2.9'
+  });
+  FB.AppEvents.logPageView();
   };
 
   (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
 <div
+  id="button"
   class="fb-like"
   data-share="true"
   data-width="450"
   data-show-faces="true">
 </div>
 
-<script>      
+<script>    
   window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1766931530285001',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
+  FB.init({
+    appId    : '1766931530285001',
+    xfbml    : true,
+    version  : 'v2.6'
+  });
   };
 
   (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));      
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));    
 </script>
 
-<div class="fb-messengermessageus" 
-     messenger_app_id="95100348886" 
-     page_id="1056933124408652" 
-     color="blue"
-     size="large">
+<div 
+  id="button"
+  class="fb-messengermessageus" 
+  messenger_app_id="95100348886" 
+  page_id="1056933124408652" 
+  color="blue"
+  size="large">
 </div>

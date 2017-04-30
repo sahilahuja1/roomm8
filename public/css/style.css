@@ -4,8 +4,8 @@ h1 {
 }
 
 #nav {
-    font: 2em "Optima", "Arial";
-    text-align: center;
+  font: 2em "Optima", "Arial";
+  text-align: center;
 }
 
 form {
@@ -13,21 +13,25 @@ form {
 }
 
 #friends {
-    font: 1em  "Arial";
-    text-align: center;
+  font: 1em  "Arial";
+  text-align: center;
 }
 
 #summary {
-   width:600px;
-   margin:0 auto;
-   text-align: center;
+  width:600px;
+  margin:0 auto;
+  text-align: center;
 }
 
 #left_col {
-   float:left;
-   width:300px;
+  float:left;
+  width:300px;
 }
 #right_col {
-   float:right;
-   width:300px;
+  float:right;
+  width:300px;
+}
+
+#button {
+  text-align: center;
 }

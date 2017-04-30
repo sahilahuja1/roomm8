@@ -7,22 +7,22 @@
 <h1>Welcome Home <%= user.name %></h1>
 
 <div id="summary">
-    <div id="left_col">
-    	Roomates:
-    	<% if (!user.room) { %>
-			You haven't joined a room!
-    	<% } else if (roomates) { %>
-		  <% roomates.forEach(function(roomate) { %>
-		    <li> <%= roomate.name %> </li>
-		  <% }); %>
-		<% } else { %>
-			You don't have any roomates!
-		<% } %>
-    </div>
-    <div id="right_col">
-        Chores:
-        <% chores.forEach(function(chore) { %>
-	    	<li> <%= chore %> </li>
-	  	<% }); %>
-    </div>
+  <div id="left_col">
+    Roomates:
+    <% if (!user.room) { %>
+      You haven't joined a room!
+    <% } else if (roomates) { %>
+      <% roomates.forEach(function(roomate) { %>
+      	<li> <%= roomate.name %> </li>
+      <% }); %>
+    <% } else { %>
+      You don't have any roomates!
+    <% } %>
+  </div>
+  <div id="right_col">
+    Chores:
+    <% chores.forEach(function(chore) { %>
+      <li> <%= chore %> </li>
+    <% }); %>
+  </div>
 </div>
