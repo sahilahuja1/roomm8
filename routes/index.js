@@ -6,7 +6,7 @@ var isAuthenticated = function (req, res, next) {
 	console.log('user: ', req.user);
 	if (req.isAuthenticated())
 		return next();
-	res.redirect('/pluto');
+	res.redirect('/');
 }
 
 module.exports = function (passport) {
