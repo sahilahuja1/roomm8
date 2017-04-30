@@ -83,7 +83,6 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
                 if(err) {
                     console.error('ERROR!');
                 }
-                sendMessage(senderId, 'Chore added!');
               });
             } else {
               chore = new mongo.chore({
@@ -94,16 +93,22 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
                 if(err) {
                     console.error('ERROR!');
                 }
-                sendMessage(senderId, 'Chore added!');
               });
             }
 
-            // BROADCAST TO ALL ROOMATES
-
+            mongo.user.find({'room' : person.room},
+              function(err, roomates) {
+                for (var i = 0; i <= roomates.length; i++) {
+                  if (roomates[i].pgid) {
+                    sendMessage(roomates[i].pgid, 'New Chore Added: ' + message.text);
+                  } 
+                }
+              }
+            );
           }
         } 
       );        
-
+      person.isAddingChore = undefined;
     }
 
 
