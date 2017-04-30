@@ -135,7 +135,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       mongo.chore.findOne({'room' : person.room},
           function (err, chore) {
             for (var i = 0; i < chore.chores.length; i++) {
-              if (chore.chores[i].toLowerCase().contains(text)) {
+              if (chore.chores[i].toLowerCase().includes(text)) {
                 var removingChore = chore.chores[i];
                 chore.chores.splice(i, 1);
                 i--;
