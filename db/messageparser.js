@@ -170,11 +170,23 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       );
     }
 
+    if (text.includes('get roomates')) {
+      mongo.user.find({'room' : person.room},
+        function(err, roomates) {
+          var roomatesString = '';
+          for (var i = 0; i < roomates.length; i++) {}
+            roomatesString += roomates[i].name + '\n';
+          }
+          sendMessage(senderId, roomatesString);
+        }
+      );
+    }
+
     // GET ROOMATES
     // request payment, mark paid
 
     if (text.includes('help')) {
-      sendMessage(senderId, 'List of available commands:\ncreate room\njoin room\nleave room\nadd chore\nget chore\nremove chore\nremove all chores');
+      sendMessage(senderId, 'List of available commands:\ncreate room\njoin room\nleave room\nadd chore\nget chore\nremove chore\nremove all chores\nget roomates');
     }
 
     person.save(function (err) {

@@ -32,6 +32,12 @@ userSchema.plugin(findOrCreate);
 
 var User = mongoose.model('User', userSchema);
 
+var paymentRequestSchema = mongoose.Schema({
+
+});
+
+var PaymentRequest = mongoose.model('PaymentRequest', paymentRequestSchema);
+
 module.exports = {
   'chore': Chore, 
   'user': User
