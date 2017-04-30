@@ -44,7 +44,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
   	  	person.isJoiningRoom = true;
       // }
 	  } else if (person.isJoiningRoom) {
-			mongo.user.findOne({'name' : text}, 
+			mongo.user.findOne({'name' : message.text}, 
 				function (err, friend) {
 					if (friend) {
 						if (friend.room) {
