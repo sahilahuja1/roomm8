@@ -19,18 +19,24 @@ module.exports = function (passport) {
 
 		mongo.user.findOne({id: req.user.id },
 		 	function(e, currUser) {
-				mongo.user.find({room: currUser.room }, 
-					function(e, roomates) {
-						mongo.chore.findOne({room: currUser.room}, 
-							function(e, chore) {
-								console.log(chore.chores);
-								res.render('home', 
-									{'user': req.user, 'roomates' : roomates, 'chores' : chore.chores}
-								);
-							}
-						);
-					}
-				);
+		 		if (currUser.room) {
+					mongo.user.find({room: currUser.room }, 
+						function(e, roomates) {
+							mongo.chore.findOne({room: currUser.room}, 
+								function(e, chore) {
+									console.log(chore.chores);
+									res.render('home', 
+										{'user': req.user, 'roomates' : roomates, 'chores' : chore.chores}
+									);
+								}
+							);
+						}
+					);
+				} else {
+					res.render('home', 
+						{'user': req.user}
+					);
+				}
 		 	}
 	 	);
 	});
