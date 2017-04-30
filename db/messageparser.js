@@ -111,6 +111,14 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       person.isAddingChore = undefined;
     }
 
+    if (text.includes('get chores')) {
+      mongo.chore.findOne({'room' : person.room},
+        function (err, chore) {
+          sendMessage(senderId, chore.chores);
+        }
+      );
+    }
+
 
     if (text.includes('help')) {
       sendMessage(senderId, 'Here is help');
