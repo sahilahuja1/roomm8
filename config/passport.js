@@ -24,17 +24,6 @@ passport.use(
                     return cb(err, user);
                 }
             );
-
-            mongo.user.find({'id' : profile.id},
-                function(err, usr) {
-                    usr.friends = profile._json.friends.data;
-                    usr.save(function (err) {
-                      if (err) {
-                        console.error('ERROR!');
-                      }
-                    });
-                }
-            );
         }
     )
 );
