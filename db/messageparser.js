@@ -111,7 +111,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       person.isAddingChore = undefined;
     }
 
-    if (text.includes('get chores')) {
+    if (text.includes('get chore')) {
       mongo.chore.findOne({'room' : person.room},
         function (err, chore) {
           sendMessage(senderId, chore.chores.join('\n'));
@@ -119,7 +119,7 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       );
     }
 
-    if (text.includes('remove chores')) {
+    if (text.includes('remove chore')) {
       if (person.room) {
         sendMessage(senderId, 'What chore would you like to remove?');
         mongo.chore.findOne({'room' : person.room},
