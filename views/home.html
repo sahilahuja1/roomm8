@@ -1,12 +1,19 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
-Welcome Home
-
-<%= username %>
 
 <div id='friends' > 
-  <% roomates.forEach(function(roomate) { %>
-    <li> <%= roomate.name %> </li>
-  <% }); %>
 </div>
 
+
+<div id="summary">
+	Welcome Home <%= username %>
+    <div id="left_col">
+    	Roomates:
+		  <% roomates.forEach(function(roomate) { %>
+		    <li> <%= roomate.name %> </li>
+		  <% }); %>
+    </div>
+    <div id="right_col">
+        chores go here
+    </div>
+</div>
