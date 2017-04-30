@@ -112,6 +112,9 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
     }
 
 
+    if (text.includes('help')) {
+      sendMessage(senderId, 'Here is help');
+    }
 
     person.save(function (err) {
       if(err) {
