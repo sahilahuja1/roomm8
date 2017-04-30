@@ -1,3 +1,9 @@
 Welcome Home
 
 <%= user.displayName %>
+
+<div id='friends' > 
+  <% roomates.forEach(function(roomate) { %>
+    <li> <%= roomate.name %> </li>
+  <% }); %>
+</div>

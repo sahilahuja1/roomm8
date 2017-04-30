@@ -11,16 +11,23 @@ var isAuthenticated = function (req, res, next) {
 
 module.exports = function (passport) {
 	router.get('/', function (req, res) {
-		mongo.user.find({room: '5905319a09840f0004a7fb3c' }, 
-			function(e, roomates) {
-				res.render('index', {'roomates' : roomates});
-			}
-		);
+		res.render('index', {'roomates' : roomates});
 	});
 
 	router.get('/home', isAuthenticated, function(req, res){
 		console.log(req.user.displayName);
-		res.render('home', { user: req.user });
+
+		mongo.user.findOne({id: req.user.id },
+		 	function(e, currUser) {
+				mongo.user.find({room: currUser.room }, 
+					function(e, roomates) {
+						res.render('home', 
+							{'user': req.user, 'roomates' : roomates});
+					}
+				);
+
+		 	}
+	 	);
 	});
 
 	router.get('/auth/facebook', 
