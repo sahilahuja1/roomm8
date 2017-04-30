@@ -15,7 +15,7 @@ module.exports = function (passport) {
 	});
 
 	router.get('/home', isAuthenticated, function(req, res){
-		console.log(req.user.displayName);
+		console.log('user: ', req.user);
 
 		mongo.user.findOne({id: req.user.id },
 		 	function(e, currUser) {
