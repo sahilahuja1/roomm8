@@ -22,7 +22,7 @@ module.exports = function (passport) {
 				mongo.user.find({room: currUser.room }, 
 					function(e, roomates) {
 						res.render('home', 
-							{'username': req.user.displayName, 'roomates' : roomates});
+							{'username': req.user.name, 'roomates' : roomates});
 					}
 				);
 		 	}
