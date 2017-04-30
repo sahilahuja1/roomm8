@@ -3,6 +3,7 @@ var router = express.Router();
 var mongo = require('../db/mongo');
 
 var isAuthenticated = function (req, res, next) {
+	console.log(req);
 	if (req.isAuthenticated())
 		return next();
 	res.redirect('/pluto');
@@ -22,7 +23,7 @@ module.exports = function (passport) {
 	});
 
 	router.get('/auth/facebook', 
-		passport.authenticate('facebook',{ scope: ['user_friends']})
+		passport.authenticate('facebook', {scope: ['user_friends']})
 	);
 
 	router.get('/auth/facebook/callback',
