@@ -5,7 +5,7 @@ var mongo = require('../db/mongo');
 var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
 		return next();
-	res.redirect('/');
+	res.redirect('/home');
 }
 
 module.exports = function (passport) {
