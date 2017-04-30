@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var request = require ('request');
 var mongo = require('./db/mongo');
 var messageparser = require('./db/messageparser');
+var expressSession = require('express-session');
 
 var app = express();
 var router = express.Router();
@@ -28,6 +29,7 @@ app.get('/', function (req, res) {
 	});
 });
 
+app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
