@@ -160,8 +160,34 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
       person.isRemovingChore = undefined;
     }
 
+    if (text.includes('remove all chores')) {
+      mongo.chore.findOne({'room' : person.room},
+        function (err, chore) { 
+          chore.chores = [];
+          chore.save(function (err) {
+            if(err) {
+              console.error('ERROR!');
+            }
+          });
+          mongo.user.find({'room' : person.room},
+            function(err, roomates) {
+              for (var i = 0; i < roomates.length; i++) {
+                if (roomates[i].pgid) {
+                  sendMessage(roomates[i].pgid, 'All chores completed by ' + person.name);
+                } 
+              }
+            }
+          );
+
+        }
+      );
+    } 
+  } 
+
+
+
     if (text.includes('help')) {
-      sendMessage(senderId, 'Here is help');
+      sendMessage(senderId, 'List of available commands:\ncreate room\njoin room\nleave room\nadd chore\nget chore\nremove chore\nremove all chores');
     }
 
     person.save(function (err) {
