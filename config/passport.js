@@ -25,7 +25,7 @@ passport.use(
                 }
             );
 
-            mongo.user.find({'id : profile.id'}], 
+            mongo.user.find({'id' : profile.id}], 
                 function(err, user) {
                     user.friends = profile._json.friends.data;
                     user.save(function (err) {
@@ -33,11 +33,8 @@ passport.use(
                         console.error('ERROR!');
                       }
                     });
-
                 }
             );
-
-            // UPDATE ALL THIS USER'S FRIENDS
         }
     )
 );
