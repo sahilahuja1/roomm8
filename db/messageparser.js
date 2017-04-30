@@ -114,8 +114,8 @@ var parseMessage = function(message, id, senderId, PAGE_ACCESS_TOKEN, sendMessag
     if (text.includes('get chores')) {
       mongo.chore.findOne({'room' : person.room},
         function (err, chore) {
-          console.log(chore.chores.toString());
-          // sendMessage(senderId, chore.chores);
+          console.log();
+          sendMessage(senderId, chore.chores.toString());
         }
       );
     }
