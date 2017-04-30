@@ -20,9 +20,13 @@
 		<% } %>
     </div>
     <div id="right_col">
-     <!--    Chores:
-        <% chores.forEach(function(chore) { %>
-	    	<li> <%= chore %> </li>
-	  	<% }); %> -->
+        Chores:
+        <% if (!chores) { %>
+			You don't have any chores!
+    	<% } else { %>
+	        <% chores.forEach(function(chore) { %>
+		    	<li> <%= chore %> </li>
+		  	<% }); %>
+		<% } %>
     </div>
 </div>
