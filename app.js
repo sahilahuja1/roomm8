@@ -24,8 +24,8 @@ var PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   'EAAZAHA840f8kBAK7qZBswki14cjR2zIps1mDZBE1f61qILkihFgNJjmOGzG7tjH0MX72QwdQeLx89ZBQQmuZBuWx0NJ3v0YBRekz2nZBBLTi8ZCKgsH6YsYXGoosByoZC2ZAiT6mGq5VhNGpVsBCOq0RdseBTRLZA82NlRiNuamQcIZAQZDZD';
 
 app.get('/', function (req, res) {
-	mongo.message.find({sender: '1314955871892871' }, function(e, message) {
-		res.render('index', {'message' : message});
+	mongo.user.find({room: '5905319a09840f0004a7fb3c' }, function(e, roomates) {
+		res.render('index', {'roomates' : roomates});
 	});
 });
 
